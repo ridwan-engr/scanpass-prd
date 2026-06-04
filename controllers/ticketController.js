@@ -58,7 +58,8 @@ export const createTicket = asyncHandler(
     res.status(201).json({
       success: true,
       ticket,
-      qrImage
+      qrImage,
+      token
     });
   }
 );

@@ -13,9 +13,7 @@ import { requireFields } from "../middleware/validateRequest.js";
 
 const router = Router();
 
-router.post(
-  "/register",
-  requireFields(
+router.post("/register", requireFields(
     "name",
     "email",
     "password"

@@ -20,7 +20,8 @@ router.post(
   requireAuth,
   requireRole(
     "admin",
-    "scanner"
+    "scanner",
+    "organizer"
   ),
   requireFields("token"),
   scanTicket

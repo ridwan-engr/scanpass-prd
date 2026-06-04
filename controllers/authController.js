@@ -56,7 +56,7 @@ export const register = asyncHandler(async (req, res) => {
     name,
     email: email.toLowerCase(),
     passwordHash,
-    role: "organizer"
+    role
   });
 
   const token = generateToken(user);
@@ -80,7 +80,7 @@ export const login = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({
     email: email.toLowerCase()
-  });
+  }).select("+passwordHash");
 
   if (!user) {
     throw new ApiError(
@@ -88,6 +88,10 @@ export const login = asyncHandler(async (req, res) => {
       "Invalid email or password."
     );
   }
+
+  console.log("User found:", user);
+  console.log("Password from request:", password);
+  console.log("Password hash from DB:", user.passwordHash);
 
   const isMatch = await bcrypt.compare(
     password,
